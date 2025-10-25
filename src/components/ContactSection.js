@@ -51,8 +51,8 @@ function ContactSection() {
                     <i className="fas fa-envelope"></i>
                   </div>
                   <h5 className="fw-bold mb-3">Email Us</h5>
-                  <p className="text-muted mb-2">hello@blinkbitlabs.com</p>
-                  <p className="text-muted">support@blinkbitlabs.com</p>
+                  <p className="text-muted mb-2">blinkbitlabs@gmail.com</p>
+                  <p className="text-muted">support.blinkbitlabs@gmail.com</p>
                   <a
                     href="mailto:hello@blinkbitlabs.com"
                     className="contact-link"

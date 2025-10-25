@@ -7,7 +7,6 @@ import { FaRocket, FaLightbulb, FaCode, FaCog } from "react-icons/fa";
 function AboutSection() {
   return (
     <section className="about-section py-5">
-      {/* Floating tech icons */}
       <div className="floating-icons">
         <FaRocket className="icon rocket" />
         <FaLightbulb className="icon lightbulb" />
@@ -16,7 +15,9 @@ function AboutSection() {
       </div>
 
       <div className="container text-center">
-        <h2 className="mb-4 text-xl">About BlinkBit Labs</h2>
+        <h2 className="contact-title display-4 fw-bold mb-3">
+          About BlinkBit Labs
+        </h2>
         <p className="about-description mb-5">
           Founded in <strong>2025</strong>, BlinkBit Labs is a forward-thinking
           tech startup delivering innovative digital solutions that redefine
@@ -39,7 +40,6 @@ function AboutSection() {
           </div>
         </div> */}
 
-        {/* Founders */}
         <div className="row justify-content-center">
           <div className="col-sm-6 col-md-4 mb-4">
             <div className="founder-card">

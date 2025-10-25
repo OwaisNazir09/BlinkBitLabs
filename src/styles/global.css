@@ -1,0 +1,30 @@
+.hero-section .shape {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite alternate;
+}
+.hero-section .shape1 { top: 20%; left: 10%; }
+.hero-section .shape2 { top: 50%; left: 80%; }
+.hero-section .shape3 { top: 70%; left: 20%; }
+.hero-section .shape4 { top: 30%; left: 60%; }
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(15deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+.service-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+.core-value-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
