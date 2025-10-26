@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   FaLaptopCode,
   FaBolt,
@@ -16,6 +18,8 @@ import {
 } from "react-icons/fa";
 
 const Services = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
@@ -573,19 +577,19 @@ const Services = () => {
           <p className="lead mb-4 text-secondary animate-on-scroll">
             Contact us today and let's start building your digital future.
           </p>
-          <a
-            href="#contact"
+          <button
+            onClick={() => navigate("/contact")}
             className="btn btn-lg px-5 py-3"
             style={{
               background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
               color: "#fff",
               borderRadius: "50px",
               fontWeight: "600",
-              textDecoration: "none",
+              border: "none",
             }}
           >
             Get in Touch <FaArrowRight className="ms-2" />
-          </a>
+          </button>
         </div>
       </section>
     </div>

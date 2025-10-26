@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/hero.css";
+import { useNavigate } from "react-router-dom";
 
 function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
+  const navigate = useNavigate();
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({
@@ -93,7 +94,10 @@ function HeroSection() {
             </p>
 
             <div className="btn-group-hero d-flex flex-column flex-sm-row gap-3 justify-content-center">
-              <button className="btn btn-hero-primary">
+              <button
+                className="btn btn-hero-primary"
+                onClick={() => navigate("/contact")}
+              >
                 <span>Get Started</span>
               </button>
               {/* <button className="btn btn-hero-secondary">

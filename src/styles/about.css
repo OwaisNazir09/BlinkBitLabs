@@ -25,69 +25,31 @@
 }
 
 /* -------------------------
-  TIMELINE STYLES
---------------------------- */
-.timeline {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-bottom: 50px;
-}
-
-.milestone .year {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #7c4dff;
-}
-
-.milestone p {
-  font-size: 1rem;
-  margin-top: 5px;
-}
-
-/* -------------------------
-  FOUNDER CARD FLIP
+  FOUNDER CARD MODERN HOVER
 --------------------------- */
 .founder-card {
-  perspective: 1000px;
-  height: 320px;
   position: relative;
-}
-
-.founder-card .card-front,
-.founder-card .card-back {
-  width: 100%;
-  height: 100%;
+  height: 320px;
   border-radius: 20px;
-  background: rgba(255,255,255,0.8);
+  border: 0.1em solid black;
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  position: absolute;
-  backface-visibility: hidden;
-  transition: transform 0.6s ease, box-shadow 0.3s ease;
-  padding: 20px;
-  box-shadow: 0 8px 32px rgba(124,77,255,0.2);
+  box-shadow: 0 8px 32px rgba(124, 77, 255, 0.2);
+  overflow: hidden;
+  font-size: large;
+  font-weight: 100;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 20px;
 }
 
-.founder-card .card-back {
-  transform: rotateY(180deg);
-  font-size: 0.95rem;
-  color: #555;
-  text-align: center;
-}
-
-.founder-card:hover .card-front {
-  transform: rotateY(180deg);
-  box-shadow: 0 12px 40px rgba(124,77,255,0.4);
-}
-
-.founder-card:hover .card-back {
-  transform: rotateY(0deg);
+.founder-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 16px 40px rgba(124, 77, 255, 0.4);
 }
 
 .founder-img {
@@ -95,13 +57,34 @@
   height: 150px;
   object-fit: cover;
   border: 3px solid rgba(124, 77, 255, 0.6);
-  transition: all 0.3s ease;
+  border-radius: 50%;
+  transition: transform 0.3s ease, border-color 0.3s ease;
   margin-bottom: 15px;
 }
 
 .founder-card:hover .founder-img {
   transform: scale(1.1);
   border-color: #7c4dff;
+}
+
+/* Text sliding from below */
+.card-back {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  color: #fffdfd;
+  font-size: 0.95rem;
+  transition: bottom 0.4s ease;
+  background: rgba(0, 0, 0, 0.9);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.founder-card:hover .card-back {
+  bottom: 0;
 }
 
 /* -------------------------
@@ -112,7 +95,7 @@
   font-size: 2rem;
   color: rgba(124, 77, 255, 0.3);
   animation: floatIcon 10s infinite ease-in-out alternate;
-  pointer-events: none; /* icons won't interfere with clicks */
+  pointer-events: none;
 }
 
 .floating-icons .rocket { top: 10%; left: 5%; animation-duration: 12s; }
@@ -151,7 +134,6 @@
 @media (max-width: 768px) {
   .founder-card { height: 300px; }
   .founder-img { width: 120px; height: 120px; }
-  .milestone { margin-bottom: 20px; }
 }
 
 @media (max-width: 576px) {

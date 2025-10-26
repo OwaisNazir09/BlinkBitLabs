@@ -23,60 +23,35 @@ function AboutSection() {
           tech startup delivering innovative digital solutions that redefine
           modern technology.
         </p>
-
-        {/* Timeline */}
-        {/* <div className="row justify-content-center mb-5">
-          <div className="col-6 col-md-3 milestone mb-3">
-            <span className="year">2025</span>
-            <p>Company Founded</p>
-          </div>
-          <div className="col-6 col-md-3 milestone mb-3">
-            <span className="year">2026</span>
-            <p>First Product Launched</p>
-          </div>
-          <div className="col-6 col-md-3 milestone mb-3">
-            <span className="year">2027</span>
-            <p>Reached 100k Users</p>
-          </div>
-        </div> */}
-
         <div className="row justify-content-center">
           <div className="col-sm-6 col-md-4 mb-4">
             <div className="founder-card">
-              <div className="card-front">
-                <img
-                  src={FounderImg}
-                  alt="Owais Nazir"
-                  className="founder-img img-fluid rounded-circle mb-3"
-                />
-                <h4>Owais Nazir</h4>
-                <p className="role">Founder</p>
-              </div>
+              <img
+                src={FounderImg}
+                alt="Owais Nazir"
+                className="founder-img img-fluid rounded-circle mb-3"
+              />
+              <h4>Owais Nazir</h4>
+              <p className="role">Founder & Tech Lead</p>
               <div className="card-back">
-                <p>
-                  Visionary entrepreneur leading BlinkBit Labs with a focus on
-                  web & software innovation.
-                </p>
+                Tech visionary and full-stack developer driving innovation
+                through cutting-edge software solutions and robust architecture.
               </div>
             </div>
           </div>
 
           <div className="col-sm-6 col-md-4 mb-4">
             <div className="founder-card">
-              <div className="card-front">
-                <img
-                  src={CoFounderImg}
-                  alt="Shehzzad Dar"
-                  className="founder-img img-fluid rounded-circle mb-3"
-                />
-                <h4>Shehzzad Dar</h4>
-                <p className="role">Co-Founder</p>
-              </div>
+              <img
+                src={CoFounderImg}
+                alt="Shehzzad Dar"
+                className="founder-img img-fluid rounded-circle mb-3"
+              />
+              <h4>Shehzzad Dar</h4>
+              <p className="role">Co-Founder & Sales Manager</p>
               <div className="card-back">
-                <p>
-                  Frontend enthusiast creating seamless user experiences with
-                  modern design & technology.
-                </p>
+                Sales strategist and business development expert building strong
+                client relationships and driving market growth.
               </div>
             </div>
           </div>

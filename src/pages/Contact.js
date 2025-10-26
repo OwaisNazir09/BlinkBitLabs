@@ -6,12 +6,10 @@ import {
   FaPaperPlane,
   FaPhone,
   FaGlobe,
-  FaArrowRight,
-  FaCalendarAlt,
-  FaCheckCircle,
 } from "react-icons/fa";
 
 const Contact = () => {
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -70,7 +68,7 @@ const Contact = () => {
   ];
 
   const quickLinks = [
-    { icon: <FaPhone />, text: "+91 XXX XXX XXXX", color: "#fa709a" },
+    { icon: <FaPhone />, text: "+91 7006968285", color: "#fa709a" },
     { icon: <FaGlobe />, text: "www.blinkbitlabs.com", color: "#30cfd0" },
   ];
 
@@ -81,14 +79,37 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
+
+    try {
+      const response = await fetch(
+        "https://blinkbitlabscrm.onrender.com/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 4000);
+      } else {
+        alert(" Failed to send message. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert(" Network error — please check your connection.");
+    }
   };
 
   return (
@@ -99,78 +120,6 @@ const Contact = () => {
         color: "#111",
       }}
     >
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scaleIn {
-          from { opacity: 0; transform: scale(0.9); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        .animate-on-scroll {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .gradient-text {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        .glass-card {
-          background: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        .hover-lift {
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hover-lift:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        .form-input {
-          width: 100%;
-          padding: 15px 20px;
-          background: rgba(255, 255, 255, 0.9);
-          border: 2px solid rgba(0, 0, 0, 0.1);
-          border-radius: 12px;
-          color: #111;
-          font-size: 1rem;
-          transition: all 0.3s ease;
-          font-family: 'Inter', sans-serif;
-        }
-        .form-input:focus {
-          outline: none;
-          background: rgba(255, 255, 255, 1);
-          border-color: #667eea;
-          box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
-        }
-        .form-input::placeholder {
-          color: rgba(0, 0, 0, 0.4);
-        }
-        .form-textarea {
-          resize: none;
-          min-height: 150px;
-        }
-        .form-label {
-          color: rgba(0, 0, 0, 0.8);
-          font-weight: 600;
-          margin-bottom: 8px;
-          display: block;
-        }
-      `}</style>
-
       {/* Hero Section */}
       <section
         className="position-relative d-flex align-items-center justify-content-center"
@@ -330,7 +279,10 @@ const Contact = () => {
             className="text-center fw-bold mb-5 animate-on-scroll"
             style={{ fontSize: "3rem" }}
           >
-            <span className="text-black">Contact Methods</span>
+            <span className="text-black">
+              {" "}
+              <i className="fas fa-envelope me-2"></i>Contact Methods
+            </span>
           </h2>
           <div className="row g-4">
             {contactMethods.map((method, index) => (
@@ -363,7 +315,7 @@ const Contact = () => {
                         {detail}
                       </p>
                     ))}
-                    <a
+                    {/* <a
                       href={method.action}
                       className="btn btn-sm mt-3 px-4 py-2"
                       style={{
@@ -387,7 +339,7 @@ const Contact = () => {
                         className="ms-2"
                         style={{ fontSize: "0.8rem" }}
                       />
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -395,91 +347,182 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      {/* Contact Form */}
+      {/* Contact Form Section */}
       <section className="py-5" style={{ background: "#fff" }}>
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-8">
-              <div className="text-center mb-5">
-                <h2 className="display-5 fw-bold mb-3 animate-on-scroll">
-                  Send Us a <span className="gradient-text">Message</span>
-                </h2>
-                <p className="lead text-dark-50 animate-on-scroll">
-                  Fill out the form below and we'll get back to you within 24
-                  hours
-                </p>
-              </div>
+          <div className="row justify-content-center mt-4">
+            <div className="col-lg-10">
+              <div className="row">
+                {/* Form Card */}
+                <div className="col-lg-8 mb-4">
+                  <div className="contact-form-card p-4 h-100">
+                    <h4 className="form-title mb-4">
+                      Send Us a <span className="gradient-text">Message</span>
+                    </h4>
+                    <form onSubmit={handleSubmit}>
+                      <div className="row">
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="name" className="form-label">
+                            Full Name *
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Enter your full name"
+                            required
+                          />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="email" className="form-label">
+                            Email Address *
+                          </label>
+                          <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter your email address"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="subject" className="form-label">
+                          Subject *
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="subject"
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          placeholder="Subject"
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="message" className="form-label">
+                          Your Message *
+                        </label>
+                        <textarea
+                          className="form-control"
+                          id="message"
+                          name="message"
+                          rows="6"
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="Tell us about your project or inquiry..."
+                          required
+                        ></textarea>
+                      </div>
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-lg w-100 contact-submit-btn"
+                      >
+                        <i className="fas fa-paper-plane me-2"></i> Send Message
+                      </button>
+                    </form>
+                    {isSubmitted && (
+                      <p
+                        className="mt-3 text-center text-success fw-bold"
+                        style={{ fontSize: "1rem" }}
+                      >
+                        Message sent successfully!
+                      </p>
+                    )}
+                  </div>
+                </div>
 
-              <div
-                className="glass-card p-5 rounded-4 animate-on-scroll"
-                style={{ opacity: 0, transform: "translateY(30px)" }}
-              >
-                <form onSubmit={handleSubmit} className="row g-4">
-                  <div className="col-md-6">
-                    <label className="form-label">Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="form-input"
-                    />
+                {/* Sidebar Info */}
+                <div className="col-lg-4 mb-4">
+                  <div className="contact-sidebar p-4 h-100">
+                    <h5 className="sidebar-title mb-4">Why Choose Us?</h5>
+
+                    <div className="feature-item d-flex mb-4">
+                      <div className="feature-icon me-3">
+                        <i className="fas fa-bolt"></i>
+                      </div>
+                      <div>
+                        <h6 className="fw-bold">Fast Response</h6>
+                        <p className="text-muted small">
+                          We typically reply within 2-4 hours during business
+                          days.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="feature-item d-flex mb-4">
+                      <div className="feature-icon me-3">
+                        <i className="fas fa-shield-alt"></i>
+                      </div>
+                      <div>
+                        <h6 className="fw-bold">Secure & Confidential</h6>
+                        <p className="text-muted small">
+                          Your information is safe with us. We respect your
+                          privacy.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="feature-item d-flex mb-4">
+                      <div className="feature-icon me-3">
+                        <i className="fas fa-headset"></i>
+                      </div>
+                      <div>
+                        <h6 className="fw-bold">24/7 Support</h6>
+                        <p className="text-muted small">
+                          Round-the-clock support for our ongoing projects and
+                          clients.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="social-links mt-4">
+                      <h6 className="fw-bold mb-3">Follow Us</h6>
+                      <div className="d-flex gap-3 justify-content-center">
+                        <a
+                          href="https://www.facebook.com/profile.php?id=61582633452531&sk=about"
+                          className="social-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <i className="fab fa-facebook-f"></i>
+                        </a>
+                        <a
+                          href="https://www.instagram.com/blinkbit.labs/"
+                          className="social-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <i className="fab fa-instagram"></i>
+                        </a>
+                        <a
+                          href="https://github.com/blinkbitlabs-spec"
+                          className="social-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <i className="fab fa-github"></i>
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/blinkbit-labs-a59683390"
+                          className="social-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <i className="fab fa-linkedin-in"></i>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label">Subject</label>
-                    <input
-                      type="text"
-                      name="subject"
-                      placeholder="Subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label">Message</label>
-                    <textarea
-                      name="message"
-                      placeholder="Your Message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      className="form-input form-textarea"
-                    />
-                  </div>
-                  <div className="col-12 text-center">
-                    <button
-                      type="submit"
-                      className="btn btn-primary px-5 py-3 rounded-pill fw-bold"
-                    >
-                      Send Message <FaPaperPlane className="ms-2" />
-                    </button>
-                  </div>
-                </form>
-                {isSubmitted && (
-                  <p
-                    className="mt-3 text-center text-success fw-bold"
-                    style={{ fontSize: "1rem" }}
-                  >
-                    Message sent successfully!
-                  </p>
-                )}
+                </div>
               </div>
             </div>
           </div>

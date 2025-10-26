@@ -1,8 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/services.css";
+import { useNavigate } from "react-router-dom";
 
 function ServicesSection() {
+  const navigate = useNavigate();
   const services = [
     {
       id: 1,
@@ -26,12 +28,7 @@ function ServicesSection() {
       description:
         "Engaging and user-centered designs to create seamless digital experiences for your apps and websites.",
       icon: "🎨",
-      features: [
-        "Wireframing",
-        "Prototyping",
-        "Figma/Adobe XD",
-      
-      ],
+      features: ["Wireframing", "Prototyping", "Figma/Adobe XD"],
     },
   ];
 
@@ -96,10 +93,10 @@ function ServicesSection() {
                     ))}
                   </ul>
 
-                  <button className="service-btn btn w-100">
+                  {/* <button className="service-btn btn w-100">
                     Learn More
                     <i className="fas fa-arrow-right ms-2"></i>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -115,14 +112,17 @@ function ServicesSection() {
                 expert services.
               </p>
               <div className="cta-buttons d-flex justify-content-center flex-wrap gap-3">
-                <button className="btn btn-primary btn-lg">
+                <button
+                  className="btn btn-primary btn-lg"
+                  onClick={() => navigate("/contact")}
+                >
                   Get Started
                   <i className="fas fa-rocket ms-2"></i>
                 </button>
-                <button className="btn btn-outline-dark btn-lg">
+                {/* <button className="btn btn-outline-dark btn-lg">
                   View Portfolio
                   <i className="fas fa-eye ms-2"></i>
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

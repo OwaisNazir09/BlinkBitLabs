@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FaUsers,
   FaBullseye,
@@ -20,7 +21,7 @@ import {
 
 const About = () => {
   const [scrollY, setScrollY] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
@@ -561,6 +562,7 @@ const About = () => {
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "scale(1)";
             }}
+            onClick={() => navigate("/contact")}
           >
             Contact Us <FaArrowRight className="ms-2" />
           </button>
