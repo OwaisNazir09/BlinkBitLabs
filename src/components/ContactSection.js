@@ -19,7 +19,6 @@ function ContactSection() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Form submitted:", formData);
     alert("Thank you for your message! We'll get back to you soon.");
     setFormData({ name: "", email: "", message: "" });
@@ -28,7 +27,6 @@ function ContactSection() {
   return (
     <section className="contact-section py-5" id="contact">
       <div className="container">
-        {/* Section Header */}
         <div className="row justify-content-center mb-5">
           <div className="col-lg-8 text-center">
             <span className="contact-badge">Get In Touch</span>
